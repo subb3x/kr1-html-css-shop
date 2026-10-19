@@ -274,6 +274,9 @@ a:focus-visible {
 }
 
 .catalog-filters {
+  position: sticky;
+  top: 96px;
+  align-self: start;
   grid-area: filters;
   padding: var(--space-md);
   border: 1px solid var(--color-border);
@@ -635,6 +638,56 @@ a:focus-visible {
   font-weight: 700;
 }
 
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.review {
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.review p {
+  margin: 0 0 var(--space-sm);
+}
+
+.review__author {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.faq {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.faq__item {
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.faq__item summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq__item p {
+  margin: var(--space-sm) 0 0;
+}
+
+.to-top {
+  position: fixed;
+  right: var(--space-md);
+  bottom: var(--space-md);
+  z-index: 3;
+}
+
 /* ===============================
    8. Адаптив
    =============================== */
@@ -650,6 +703,7 @@ a:focus-visible {
   }
 
   .products-grid,
+  .reviews,
   .concept-grid,
   .categories-grid,
   .catalog-layout,
@@ -661,5 +715,9 @@ a:focus-visible {
     grid-template-areas:
       "filters"
       "products";
+  }
+
+  .catalog-filters {
+    position: static;
   }
 }
