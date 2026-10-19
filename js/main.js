@@ -142,6 +142,25 @@ if (filtersForm) {
   }
 }
 
+// Картинка товара берётся из images по номеру в каталоге: 1.png или 1.jpg.
+const productImages = document.querySelectorAll('[data-image]');
+
+productImages.forEach((image) => {
+  const number = image.dataset.image;
+
+  image.addEventListener('error', () => {
+    if (image.dataset.fallback !== 'jpg') {
+      image.dataset.fallback = 'jpg';
+      image.src = 'images/' + number + '.jpg';
+      return;
+    }
+
+    image.remove();
+  });
+
+  image.src = 'images/' + number + '.png';
+});
+
 // Кнопка «Наверх» прокручивает страницу в начало.
 const toTopButton = document.querySelector('.to-top');
 
