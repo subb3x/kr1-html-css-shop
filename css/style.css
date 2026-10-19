@@ -526,10 +526,26 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   min-height: 96px;
+  overflow: hidden;
   border-radius: var(--radius-sm);
   background-color: var(--color-surface-accent);
   color: var(--color-primary);
   font-weight: 700;
+}
+
+.product-card__media img,
+.product-details__preview img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card__media img {
+  height: 96px;
+}
+
+.product-details__preview img {
+  height: 280px;
 }
 
 .product-card__media--writing {
@@ -582,6 +598,7 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   min-height: 280px;
+  overflow: hidden;
   border-radius: var(--radius-md);
   background-color: var(--color-surface-accent);
   color: var(--color-primary);
