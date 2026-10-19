@@ -141,3 +141,15 @@ if (filtersForm) {
     }
   }
 }
+
+// Кнопка «Наверх» прокручивает страницу в начало.
+const toTopButton = document.querySelector('.to-top');
+
+if (toTopButton) {
+  toTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
