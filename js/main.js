@@ -11,23 +11,28 @@ const closeDialogButton = document.getElementById('close-order-dialog');
 const selectedProductInput = document.getElementById('selected-product');
 
 // Перебираем все кнопки «Заказать».
-orderButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    // Получаем название товара из data-атрибута.
-    const productName = button.dataset.product;
+// На страницах без формы этот блок просто не выполняется.
+if (orderDialog && selectedProductInput) {
+  orderButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Получаем название товара из data-атрибута.
+      const productName = button.dataset.product;
 
-    // Записываем название товара в скрытое поле формы.
-    selectedProductInput.value = productName;
+      // Записываем название товара в скрытое поле формы.
+      selectedProductInput.value = productName;
 
-    // Открываем модальное окно.
-    orderDialog.showModal();
+      // Открываем модальное окно.
+      orderDialog.showModal();
+    });
   });
-});
+}
 
 // Закрываем модальное окно по кнопке «Закрыть».
-closeDialogButton.addEventListener('click', () => {
-  orderDialog.close();
-});
+if (orderDialog && closeDialogButton) {
+  closeDialogButton.addEventListener('click', () => {
+    orderDialog.close();
+  });
+}
 
 // Получаем форму заявки.
 const orderForm = document.getElementById('order-form');
@@ -36,7 +41,8 @@ const orderForm = document.getElementById('order-form');
 const successMessage = document.getElementById('success-message');
 
 // Обрабатываем отправку формы.
-orderForm.addEventListener('submit', (event) => {
+if (orderForm && orderDialog && successMessage) {
+  orderForm.addEventListener('submit', (event) => {
   // Отменяем стандартную отправку формы,
   // потому что backend пока не подключён.
   event.preventDefault();
@@ -70,5 +76,68 @@ orderForm.addEventListener('submit', (event) => {
   orderForm.reset();
 
   // Закрываем модальное окно.
-  orderDialog.close();
-});
+    orderDialog.close();
+  });
+}
+
+// Фильтр каталога: категория и цена.
+// На страницах без формы этот блок не выполняется.
+const filtersForm = document.querySelector('.filters-form');
+const catalogEmpty = document.getElementById('catalog-empty');
+
+if (filtersForm) {
+  const applyFilters = () => {
+    const checked = [];
+
+    filtersForm.querySelectorAll('input[name="category"]:checked').forEach((input) => {
+      checked.push(input.value);
+    });
+
+    const priceFromInput = filtersForm.querySelector('#price-from');
+    const priceToInput = filtersForm.querySelector('#price-to');
+    const priceFrom = priceFromInput && priceFromInput.value ? Number(priceFromInput.value) : 0;
+    const priceTo = priceToInput && priceToInput.value ? Number(priceToInput.value) : Infinity;
+
+    const cards = document.querySelectorAll('.catalog-products .product-card');
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const categoryMatches = checked.length === 0
+        || checked.includes('all')
+        || checked.includes(card.dataset.category);
+      const price = Number(card.dataset.price);
+      const priceMatches = price >= priceFrom && price <= priceTo;
+      const isVisible = categoryMatches && priceMatches;
+
+      card.hidden = !isVisible;
+
+      if (isVisible) {
+        visibleCount += 1;
+      }
+    });
+
+    if (catalogEmpty) {
+      catalogEmpty.hidden = visibleCount !== 0;
+    }
+  };
+
+  filtersForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    applyFilters();
+  });
+
+  // Ссылка вида catalog.html?category=popular сразу отмечает фильтр.
+  const params = new URLSearchParams(window.location.search);
+  const categoryFromUrl = params.get('category');
+
+  if (categoryFromUrl) {
+    const categoryInput = filtersForm.querySelector(
+      'input[name="category"][value="' + categoryFromUrl + '"]'
+    );
+
+    if (categoryInput) {
+      categoryInput.checked = true;
+      applyFilters();
+    }
+  }
+}
