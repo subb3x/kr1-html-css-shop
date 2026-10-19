@@ -6,6 +6,7 @@
   <meta name="description" content="Каталог товаров учебного интернет-магазина.">
   <title>Каталог товаров — Учебный интернет-магазин</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -15,20 +16,16 @@
       <nav class="site-nav" aria-label="Основная навигация">
         <ul class="site-nav__list">
           <li class="site-nav__item">
-            <a class="site-nav__link site-nav__link--active" href="index.html">
-              Главная
-            </a>
+            <a class="site-nav__link" href="index.html">Главная</a>
           </li>
           <li class="site-nav__item">
-            <a class="site-nav__link" href="catalog.html">Каталог</a>
+            <a class="site-nav__link site-nav__link--active" href="catalog.html">Каталог</a>
           </li>
           <li class="site-nav__item">
             <a class="site-nav__link" href="contacts.html">Контакты</a>
           </li>
           <li class="site-nav__item">
-            <a class="site-nav__link" href="index.html#popular">
-              Популярные товары
-            </a>
+            <a class="site-nav__link" href="index.html#popular">Популярные товары</a>
           </li>
         </ul>
       </nav>
@@ -37,8 +34,8 @@
 
   <main>
     <nav class="breadcrumbs" aria-label="Хлебные крошки">
-      <a class=""breadcrumbs__link href="index.html">Главная</a>
-      <span class=""breadcrumbs__current">Каталог</span>
+      <a class="breadcrumbs__link" href="index.html">Главная</a>
+      <span class="breadcrumbs__current">Каталог</span>
     </nav>
 
     <section class="section">
@@ -51,87 +48,164 @@
     </section>
 
     <section class="catalog-layout">
-        <aside class="catalog-filters">
-            <h2>Фильтры</h2>
+      <aside class="catalog-filters">
+        <h2>Фильтры</h2>
 
-            <form class="filters-form" action="#" method="get">
-            <fieldset>
-                <legend>Категория</legend>
+        <form class="filters-form" action="#" method="get">
+          <fieldset>
+            <legend>Категория</legend>
 
-                <label>
-                <input type="checkbox" name="category" value="all">
-                Все товары
-                </label>
+            <label>
+              <input type="checkbox" name="category" value="all">
+              Все товары
+            </label>
 
-                <label>
-                <input type="checkbox" name="category" value="popular">
-                Популярные
-                </label>
+            <label>
+              <input type="checkbox" name="category" value="popular">
+              Популярные
+            </label>
 
-                <label>
-                <input type="checkbox" name="category" value="new">
-                Новинки
-                </label>
-            </fieldset>
+            <label>
+              <input type="checkbox" name="category" value="new">
+              Новинки
+            </label>
+          </fieldset>
 
-            <fieldset>
-                <legend>Цена</legend>
+          <fieldset>
+            <legend>Цена</legend>
 
-                <label for="price-from">От</label>
-                <input id="price-from" name="price-from" type="number" min="0" placeholder="0">
+            <label for="price-from">От</label>
+            <input id="price-from" name="price-from" type="number" min="0" placeholder="0">
 
-                <label for="price-to">До</label>
-                <input id="price-to" name="price-to" type="number" min="0" placeholder="5000">
-            </fieldset>
+            <label for="price-to">До</label>
+            <input id="price-to" name="price-to" type="number" min="0" placeholder="5000">
+          </fieldset>
 
-            <button class="button" type="submit">Применить</button>
-            </form>
-        </aside>
+          <button class="button button--primary" type="submit">Применить</button>
+        </form>
 
-        <section class="catalog-products">
-            <h2>Список товаров</h2>
+        <p class="filters-note">
+          <a href="category.html">Популярные</a>
+        </p>
+      </aside>
 
-            <div class="products-grid">
-              <article class="product-card">
-                <h3 class=""product-card__title>Товар 1</h3>
-                <p class="product-card__description">Краткое описание учебного товара.</p>
-                <p class="product-card__price">Цена: 1000 руб.</p>
-                <button
-                  class="button product-card__button"
-                  type="button"
-                  data-product="Товар 1"
-                >
-                  Заказать
-                </button>
-              </article>
+      <section class="catalog-products">
+        <h2>Список товаров</h2>
+        <p class="catalog-empty" id="catalog-empty" hidden>
+          Ничего не найдено. Измените фильтры.
+        </p>
 
-              <article class="product-card">
-                <h3 class=""product-card__title>Товар 2</h3>
-                <p class="product-card__description">Краткое описание учебного товара.</p>
-                <p class="product-card__price">Цена: 1500 руб.</p>
-                <button
-                  class="button product-card__button"
-                  type="button"
-                  data-product="Товар 2"
-                >
-                  Заказать
-                </button>
-              </article>
-
-              <article class="product-card product-card">
-                <h3 class=""product-card__title>Товар 3</h3>
-                <p class="product-card__description">Краткое описание учебного товара.</p>
-                <p class="product-card__price">Цена: 2000 руб.</p>
-                <button
-                  class="button product-card__button"
-                  type="button"
-                  data-product="Товар 3"
-                >
-                  Заказать
-                </button>
-              </article>
+        <div class="products-grid">
+          <article class="product-card" data-category="popular" data-price="1000">
+            <div class="product-card__media" aria-hidden="true">1</div>
+            <h3 class="product-card__title">Товар 1</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 1000 руб.</p>
+            <div class="product-card__actions">
+              <a class="button button--secondary" href="product.html">Подробнее</a>
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 1">
+                Заказать
+              </button>
             </div>
-        </section>
+          </article>
+
+          <article class="product-card" data-category="popular" data-price="1500">
+            <div class="product-card__media" aria-hidden="true">2</div>
+            <h3 class="product-card__title">Товар 2</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 1500 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 2">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="popular" data-price="2000">
+            <div class="product-card__media" aria-hidden="true">3</div>
+            <h3 class="product-card__title">Товар 3</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 2000 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 3">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="new" data-price="1200">
+            <div class="product-card__media product-card__media--writing" aria-hidden="true">4</div>
+            <h3 class="product-card__title">Товар 4</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 1200 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 4">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="new" data-price="1700">
+            <div class="product-card__media product-card__media--writing" aria-hidden="true">5</div>
+            <h3 class="product-card__title">Товар 5</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 1700 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 5">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="popular" data-price="2500">
+            <div class="product-card__media" aria-hidden="true">6</div>
+            <h3 class="product-card__title">Товар 6</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 2500 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 6">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="new" data-price="800">
+            <div class="product-card__media product-card__media--writing" aria-hidden="true">7</div>
+            <h3 class="product-card__title">Товар 7</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 800 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 7">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="new" data-price="3000">
+            <div class="product-card__media product-card__media--accessories" aria-hidden="true">8</div>
+            <h3 class="product-card__title">Товар 8</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 3000 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 8">
+                Заказать
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card" data-category="popular" data-price="2200">
+            <div class="product-card__media product-card__media--accessories" aria-hidden="true">9</div>
+            <h3 class="product-card__title">Товар 9</h3>
+            <p class="product-card__description">Краткое описание учебного товара.</p>
+            <p class="product-card__price">Цена: 2200 руб.</p>
+            <div class="product-card__actions">
+              <button class="button button--primary product-card__button" type="button" data-product="Товар 9">
+                Заказать
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
     </section>
   </main>
 
@@ -139,5 +213,107 @@
     <p>&copy; 2026 Учебный проект. Все права защищены.</p>
     <p>Дисциплина: Фронтенд и бэкенд разработка</p>
   </footer>
+
+  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
+    <h2 class="order-dialog__title" id="order-dialog-title">Оформление заявки</h2>
+
+    <form class="order-form" id="order-form" action="#" method="post" novalidate>
+      <input id="selected-product" name="selected-product" type="hidden">
+
+      <div class="order-form__field">
+        <label class="order-form__label" for="order-name">Имя</label>
+        <input
+          class="order-form__input"
+          id="order-name"
+          name="name"
+          type="text"
+          placeholder="Введите ваше имя"
+          minlength="2"
+          autocomplete="given-name"
+          required
+        >
+      </div>
+
+      <div class="order-form__field">
+        <label class="order-form__label" for="order-email">E-mail</label>
+        <input
+          class="order-form__input"
+          id="order-email"
+          name="email"
+          type="email"
+          placeholder="example@mail.ru"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="order-form__field">
+        <label class="order-form__label" for="order-phone">Телефон</label>
+        <input
+          class="order-form__input"
+          id="order-phone"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          placeholder="+7 (900) 000-00-00"
+          pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$"
+          required
+        >
+        <small class="order-form__hint">Формат: +7 (900) 000-00-00</small>
+      </div>
+
+      <div class="order-form__field">
+        <label class="order-form__label" for="order-date">Дата связи</label>
+        <input class="order-form__input" id="order-date" name="date" type="date">
+      </div>
+
+      <div class="order-form__field">
+        <label class="order-form__label" for="order-topic">Тема заявки</label>
+        <select class="order-form__select" id="order-topic" name="topic" required>
+          <option value="">Выберите тему</option>
+          <option value="product">Заказ товара</option>
+          <option value="consultation">Консультация</option>
+          <option value="delivery">Доставка</option>
+        </select>
+      </div>
+
+      <div class="order-form__field">
+        <label class="order-form__label" for="order-comment">Комментарий</label>
+        <textarea
+          class="order-form__textarea"
+          id="order-comment"
+          name="comment"
+          rows="4"
+          placeholder="Укажите дополнительную информацию"
+        ></textarea>
+      </div>
+
+      <div class="order-form__field order-form__field--checkbox">
+        <label class="order-form__checkbox-label">
+          <input
+            class="order-form__checkbox"
+            id="order-agreement"
+            name="agreement"
+            type="checkbox"
+            required
+          >
+          Я согласен на обработку данных
+        </label>
+      </div>
+
+      <div class="order-form__actions">
+        <button class="button button--secondary" type="button" id="close-order-dialog">
+          Закрыть
+        </button>
+        <button class="button button--primary" type="submit">
+          Отправить заявку
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <p class="success-message" id="success-message" hidden>
+    Форма успешно отправлена!
+  </p>
 </body>
 </html>
